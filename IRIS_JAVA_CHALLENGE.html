@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="QUIZ_BEE_TEMPLATE_WITH_IMAGE _NO_TIMER.css">
+    <link rel="icon" href="IRIS_LOGO_NOBG.png">
+    <title>IRIS INNOVATION</title>
+</head>
+<body>
+
+<section class="SECTION_ONE">  
+
+<div class="SECTION_ONE_INTRODUCTORY">
+<h1>
+    JAVA CHALLENGE
+</h1>
+
+<P>
+    <b>INSTRUCTION:</b>
+    Select the correct answer for each question. You have 3 lives to complete the quiz. If you choose the wrong answer or run out of time, you will lose a life. Once all your lives are gone, the quiz will end. Good luck!
+</P>
+
+<a href="IRIS_HOMEPAGE.html">GO BACK</a>
+</div>
+
+<div class="quiz-container">
+    <div id="quiz" style="display: none;">
+        <div id="lives" class="lives">Lives: 3</div>
+
+        <!-- PUT YOUR IMAGE QUESTION HERE -->
+
+            <!-- IMAGE 1 -->
+            <img id="questionImage" class="question-image" src="#" alt="Question Image 1" style="display: none; max-width: 50%; height: auto; text-align: center;">
+            
+            <!-- IMAGE 2 -->
+            <img id="questionImage" class="question-image" src="#" alt="Question Image 2" style="display: none; max-width: 100%; height: auto;">
+       
+        <!-- PUT YOUR IMAGE QUESTION HERE -->
+
+        <div id="question" class="question">Press Start to Begin</div>
+        <div id="answers" class="answers"></div>
+    </div>
+    <button id="startBtn" class="start-btn">Start</button>
+    <div id="gameOver" class="game-over" style="display: none;">Game Over! Refresh to play again.</div>
+</div>
+
+</section>
+
+<script>
+   const quizData = [
+        { question: "What is the correct syntax to declare a variable in Java?", options: ["var x = 5;", "int x = 5;", "x = 5;", "declare x = 5;"], correct: 1 },
+        { question: "Which keyword is used to create a class in Java?", options: ["class", "Class", "CLASS", "struct"], correct: 0 },
+        { question: "What is the output of System.out.println(5 + 3);?", options: ["8", "53", "error", "undefined"], correct: 0 },
+        { question: "Which of the following is NOT a primitive data type in Java?", options: ["int", "String", "boolean", "double"], correct: 1 },
+        { question: "What is the default value of an int variable in Java?", options: ["0", "null", "1", "-1"], correct: 0 },
+        { question: "Which loop executes at least once?", options: ["for", "while", "do-while", "foreach"], correct: 2 },
+        { question: "What does 'new' keyword do in Java?", options: ["Creates a new variable", "Creates a new object", "Starts a new method", "Declares a new class"], correct: 1 },
+        { question: "Which access modifier makes a variable accessible everywhere?", options: ["private", "protected", "public", "default"], correct: 2 },
+        { question: "What is the output of System.out.println(10 % 3);?", options: ["3", "1", "10", "0"], correct: 1 },
+        { question: "Which keyword is used to prevent a class from being inherited?", options: ["static", "final", "abstract", "sealed"], correct: 1 },
+        { question: "What is the correct way to create an array in Java?", options: ["int array[] = new int[5];", "int[] array = new int[5];", "array int[] = new int[5];", "Both A and B"], correct: 3 },
+        { question: "Which method is called automatically when an object is created?", options: ["init()", "start()", "constructor", "main()"], correct: 2 },
+        { question: "What is the output of System.out.println('5' + '3');?", options: ["8", "53", "error", "null"], correct: 1 },
+        { question: "Which keyword is used to inherit a class in Java?", options: ["inherits", "extends", "implements", "super"], correct: 1 },
+        { question: "What is the size of an int in Java?", options: ["2 bytes", "4 bytes", "8 bytes", "16 bytes"], correct: 1 },
+        { question: "Which of the following is a valid variable name in Java?", options: ["2var", "_var", "var-name", "var name"], correct: 1 },
+        { question: "What does the 'static' keyword mean?", options: ["Creates multiple copies", "Creates one copy for the class", "Creates a temporary variable", "Creates a global variable"], correct: 1 },
+        { question: "Which method must be present in every Java application?", options: ["init()", "main()", "start()", "run()"], correct: 1 },
+        { question: "What is the output of System.out.println(true && false);?", options: ["true", "false", "null", "error"], correct: 1 },
+        { question: "Which keyword is used to implement an interface?", options: ["extends", "implements", "inherits", "uses"], correct: 1 },
+        { question: "What is the correct syntax to catch an exception?", options: ["catch(Exception e)", "catch Exception e", "catch: Exception e", "catch Exception(e)"], correct: 0 },
+        { question: "Which collection stores unique elements?", options: ["ArrayList", "LinkedList", "HashSet", "Vector"], correct: 2 },
+        { question: "What is the output of System.out.println(5 / 2);?", options: ["2.5", "2", "3", "error"], correct: 1 },
+        { question: "Which keyword is used to create an interface?", options: ["interface", "Interface", "class", "abstract"], correct: 0 },
+        { question: "What is the default value of a boolean variable in Java?", options: ["true", "false", "null", "0"], correct: 1 },
+        { question: "Which method is used to convert a String to an integer?", options: ["toInt()", "parseInt()", "stringToInt()", "valueOf()"], correct: 1 },
+        { question: "What does the 'this' keyword refer to?", options: ["Current class", "Current object", "Parent class", "Superclass"], correct: 1 },
+        { question: "Which operator is used for comparison in Java?", options: ["=", "==", "===", "!="], correct: 1 },
+        { question: "What is the output of System.out.println(10 > 5);?", options: ["true", "false", "1", "error"], correct: 0 },
+        { question: "Which keyword is used to create a constant variable?", options: ["const", "constant", "final", "static"], correct: 2 },
+        { question: "What is the size of a boolean in Java?", options: ["1 byte", "2 bytes", "4 bytes", "Not fixed"], correct: 3 },
+        { question: "Which method is used to get the length of an array?", options: [".length()", ".size()", ".length", ".getLength()"], correct: 2 },
+        { question: "What is the output of System.out.println(5 * 2 + 3);?", options: ["13", "25", "16", "40"], correct: 0 },
+        { question: "Which keyword is used to call a parent class method?", options: ["parent", "super", "this", "base"], correct: 1 },
+        { question: "What is the correct way to create a String in Java?", options: ["String str = 'Hello';", "String str = \"Hello\";", "string str = \"Hello\";", "String str = <Hello>"], correct: 1 },
+        { question: "Which exception is thrown when dividing by zero?", options: ["NullPointerException", "ArithmeticException", "NumberFormatException", "IndexOutOfBoundsException"], correct: 1 },
+        { question: "What is the output of System.out.println(3 == 3.0);?", options: ["true", "false", "error", "null"], correct: 0 },
+        { question: "Which method is used to check if a String contains a substring?", options: [".contains()", ".indexOf()", ".find()", ".search()"], correct: 0 },
+        { question: "What is the output of System.out.println(5 > 3 && 2 < 4);?", options: ["true", "false", "null", "error"], correct: 0 },
+        { question: "Which keyword is used to throw an exception?", options: ["throw", "throws", "try", "catch"], correct: 0 },
+        { question: "What is the default value of a String variable in Java?", options: ["\"\"", "null", "' '", "undefined"], correct: 1 },
+        { question: "Which method is used to get the character at index 0 in a String?", options: [".charAt(0)", ".getChar(0)", ".character(0)", ".index(0)"], correct: 0 },
+        { question: "What is the output of System.out.println(2 + 3 * 4);?", options: ["14", "20", "10", "5"], correct: 0 },
+        { question: "Which collection maintains insertion order?", options: ["HashSet", "HashMap", "LinkedList", "TreeSet"], correct: 2 },
+        { question: "What does 'null' represent in Java?", options: ["Zero", "False", "No object/value", "Empty String"], correct: 2 },
+        { question: "Which keyword prevents method overriding?", options: ["static", "abstract", "final", "sealed"], correct: 2 },
+        { question: "What is the output of System.out.println(10 - 5 - 2);?", options: ["3", "-3", "7", "13"], correct: 0 },
+        { question: "Which method is used to convert an integer to a String?", options: ["toString()", "intToString()", "valueOf()", "Both A and C"], correct: 3 },
+        { question: "What is the correct syntax for an if statement in Java?", options: ["if (condition) {}", "if condition {}", "if (condition)", "if: condition {}"], correct: 0 }
+    ];
+
+    const livesEl = document.getElementById('lives');
+    const timerEl = document.getElementById('timer');
+    const questionEl = document.getElementById('question');
+    const answersEl = document.getElementById('answers');
+    const startBtn = document.getElementById('startBtn');
+    const gameOverEl = document.getElementById('gameOver');
+    const refreshBtn = document.createElement('button');
+    const quizEl = document.getElementById('quiz');
+    const questionImageEl = document.getElementById('questionImage');
+
+    let currentQuestion = 0;
+    let lives = 3;
+    let timer;
+    let timeLeft = 10;
+    let score = 0;
+
+    function shuffleQuestions() {
+        for (let i = quizData.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [quizData[i], quizData[j]] = [quizData[j], quizData[i]];
+        }
+    }
+
+    function loadQuestion() {
+        if (currentQuestion >= quizData.length) {
+            endGame();
+            return;
+        }
+
+        quizEl.style.display = 'block';
+        const q = quizData[currentQuestion];
+        questionEl.textContent = q.question;
+        answersEl.innerHTML = '';
+
+        if (q.image) {
+            questionImageEl.src = q.image;
+            questionImageEl.style.display = 'block';
+        } else {
+            questionImageEl.style.display = 'none';
+        }
+
+        q.options.forEach((option, index) => {
+            const btn = document.createElement('button');
+            btn.textContent = option;
+            btn.className = 'answer';
+            btn.addEventListener('click', () => handleAnswer(index));
+            answersEl.appendChild(btn);
+        });
+
+        resetTimer();
+    }
+
+    function handleAnswer(selected) {
+        const q = quizData[currentQuestion];
+        if (selected === q.correct) {
+            score++;
+            currentQuestion++;
+            loadQuestion();
+        } else {
+            lives--;
+            updateLives();
+            if (lives === 0) {
+                endGame();
+            }
+        }
+    }
+
+    function updateLives() {
+        livesEl.textContent = `Lives: ${lives}`;
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timeLeft = 10;
+        timerEl.textContent = `Time: ${timeLeft}`;
+        timer = setInterval(() => {
+            timeLeft--;
+            timerEl.textContent = `Time: ${timeLeft}`;
+            if (timeLeft === 0) {
+                lives--;
+                updateLives();
+                if (lives === 0) {
+                    endGame();
+                } else {
+                    currentQuestion++;
+                    loadQuestion();
+                }
+            }
+        }, 1000);
+    }
+
+    function endGame() {
+    clearInterval(timer); // Stop the timer
+
+    // Hide all quiz elements
+    quizEl.style.display = 'none';
+
+    // Show game over message
+    gameOverEl.style.display = 'block';
+    gameOverEl.textContent = `Your score is ${score}.`;
+
+    // Add "Play Again" button
+    refreshBtn.textContent = "Play Again";
+    refreshBtn.className = 'start-btn';
+    refreshBtn.style.marginTop = '20px';
+
+    // Append button only if it's not already there
+    if (!gameOverEl.contains(refreshBtn)) {
+        gameOverEl.appendChild(refreshBtn);
+    }
+
+    refreshBtn.addEventListener('click', () => {
+        location.reload(); // Restart the game
+    });
+}
+
+    startBtn.addEventListener('click', () => {
+        shuffleQuestions();
+        startBtn.style.display = 'none';
+        loadQuestion();
+    });
+</script>
+
+</body>
+</html>

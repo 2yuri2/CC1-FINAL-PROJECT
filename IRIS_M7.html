@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="QUIZ_BEE_TEMPLATE_WITH_IMAGE _NO_TIMER.css">
+    <link rel="icon" href="LOGO_THREE_STEM_SOCIETY.png">
+    <title>UC STEM SOCIETY</title>
+</head>
+<body>
+
+<section class="SECTION_ONE">  
+
+<div class="SECTION_ONE_INTRODUCTORY">
+<h1>
+    MODULE 6
+</h1>
+
+<P>
+    <b>INSTRUCTION:</b>
+    Select the correct answer for each question. You have 3 lives to complete the quiz. If you choose the wrong answer or run out of time, you will lose a life. Once all your lives are gone, the quiz will end. Good luck!
+</P>
+
+<a href="IRIS_HOMEPAGE.html">GO BACK</a>
+</div>
+
+<div class="quiz-container">
+    <div id="quiz" style="display: none;">
+        <div id="lives" class="lives">Lives: 3</div>
+
+        <!-- PUT YOUR IMAGE QUESTION HERE -->
+
+            <!-- IMAGE 1 -->
+            <img id="questionImage" class="question-image" src="#" alt="Question Image 1" style="display: none; max-width: 100%; height: auto; text-align: center;">
+            
+            <!-- IMAGE 2 -->
+            <img id="questionImage" class="question-image" src="#" alt="Question Image 2" style="display: none; max-width: 100%; height: auto;">
+       
+        <!-- PUT YOUR IMAGE QUESTION HERE -->
+
+        <div id="question" class="question">Press Start to Begin</div>
+        <div id="answers" class="answers"></div>
+    </div>
+    <button id="startBtn" class="start-btn">Start</button>
+    <div id="gameOver" class="game-over" style="display: none;">Game Over! Refresh to play again.</div>
+</div>
+
+</section>
+
+<script>
+   const quizData = [
+        {
+            question: "A syntax error occurs when",
+            options: [
+                "The program runs too slowly",
+                "The grammar rules of the language are violated",
+                "A wrong output is produced",
+                "The computer crashes"
+            ],
+            correct: 1
+        },
+        {
+            question: "A runtime error occurs",
+            options: [
+                "During compilation",
+                "When the program is being typed",
+                "During program execution",
+                "After the program finishes"
+            ],
+            correct: 2
+        },
+        {
+            question: "A logical error results in",
+            options: [
+                "Program crash",
+                "Incorrect output",
+                "Compilation failure",
+                "Hardware malfunction"
+            ],
+            correct: 1
+        },
+        {
+            question: "Dividing a number by zero causes",
+            options: [
+                "Syntax error",
+                "Logical error",
+                "ArithmeticException",
+                "IOException"
+            ],
+            correct: 2
+        },
+        {
+            question: "A try block contains",
+            options: [
+                "Code that handles errors",
+                "Code assumed to run normally",
+                "Variable declarations only",
+                "Only input statements"
+            ],
+            correct: 1
+        },
+        {
+            question: "A catch block is used to",
+            options: [
+                "End the program",
+                "Declare variables",
+                "Handle exceptions",
+                "Optimize memory"
+            ],
+            correct: 2
+        },
+        {
+            question: "An exception is",
+            options: [
+                "A loop",
+                "An object representing an error",
+                "A class variable",
+                "A file"
+            ],
+            correct: 1
+        },
+        {
+            question: "If an exception is not handled",
+            options: [
+                "The program continues normally",
+                "The program terminates abnormally",
+                "The program compiles again",
+                "The IDE auto-corrects it"
+            ],
+            correct: 1
+        },
+        {
+            question: "ArithmeticException belongs to",
+            options: [
+                "Error class",
+                "RuntimeException class",
+                "IOException class",
+                "String class"
+            ],
+            correct: 1
+        },
+        {
+            question: "A custom exception class is created by",
+            options: [
+                "Implementing Runnable",
+                "Extending java.lang.Exception",
+                "Extending Object",
+                "Importing java.error"
+            ],
+            correct: 1
+        },
+        {
+            question: "throw keyword",
+            options: [
+                "Declares an exception",
+                "Creates and triggers an exception",
+                "Ends the program",
+                "Imports libraries"
+            ],
+            correct: 1
+        },
+        {
+            question: "throws keyword",
+            options: [
+                "Handles the exception",
+                "Declares that a method may throw an exception",
+                "Deletes variables",
+                "Breaks the program"
+            ],
+            correct: 1
+        },
+        {
+            question: "finally block executes",
+            options: [
+                "Only when there is no error",
+                "Only when there is an error",
+                "Only when the program returns a value",
+                "Always, regardless of errors"
+            ],
+            correct: 3
+        },
+        {
+            question: "print debugging means",
+            options: [
+                "Removing print statements",
+                "Adding print statements to trace program flow",
+                "Compiling repeatedly",
+                "Disabling errors"
+            ],
+            correct: 1
+        },
+        {
+            question: "Step-through debugging is done by",
+            options: [
+                "Running the entire program instantly",
+                "Executing lines one-by-one",
+                "Adding more classes",
+                "Using only print statements"
+            ],
+            correct: 1
+        },
+        {
+            question: "Breakpoints are used to",
+            options: [
+                "Add comments",
+                "Stop the program at a specific line",
+                "Edit code faster",
+                "Change memory settings"
+            ],
+            correct: 1
+        },
+        {
+            question: "System errors belong to",
+            options: [
+                "Exception class",
+                "RuntimeException class",
+                "Error class",
+                "IO class"
+            ],
+            correct: 2
+        },
+        {
+            question: "Accessing an out-of-bounds index causes",
+            options: [
+                "NullPointerException",
+                "ArrayIndexOutOfBoundsException",
+                "IOException",
+                "IllegalStateException"
+            ],
+            correct: 1
+        },
+        {
+            question: "Incorrect variable names like “2num” cause",
+            options: [
+                "Logical errors",
+                "Syntax errors",
+                "Runtime errors",
+                "No errors"
+            ],
+            correct: 1
+        },
+        {
+            question: "Replacing division with multiplication in code is a",
+            options: [
+                "Syntax error",
+                "Runtime error",
+                "Logical error",
+                "Compiler error"
+            ],
+            correct: 2
+        }
+
+
+    ];
+
+    const livesEl = document.getElementById('lives');
+    const timerEl = document.getElementById('timer');
+    const questionEl = document.getElementById('question');
+    const answersEl = document.getElementById('answers');
+    const startBtn = document.getElementById('startBtn');
+    const gameOverEl = document.getElementById('gameOver');
+    const refreshBtn = document.createElement('button');
+    const quizEl = document.getElementById('quiz');
+    const questionImageEl = document.getElementById('questionImage');
+
+    let currentQuestion = 0;
+    let lives = 3;
+    let timer;
+    let timeLeft = 10;
+    let score = 0;
+
+    function shuffleQuestions() {
+        for (let i = quizData.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [quizData[i], quizData[j]] = [quizData[j], quizData[i]];
+        }
+    }
+
+    function loadQuestion() {
+        if (currentQuestion >= quizData.length) {
+            endGame();
+            return;
+        }
+
+        quizEl.style.display = 'block';
+        const q = quizData[currentQuestion];
+        questionEl.textContent = q.question;
+        answersEl.innerHTML = '';
+
+        if (q.image) {
+            questionImageEl.src = q.image;
+            questionImageEl.style.display = 'block';
+        } else {
+            questionImageEl.style.display = 'none';
+        }
+
+        q.options.forEach((option, index) => {
+            const btn = document.createElement('button');
+            btn.textContent = option;
+            btn.className = 'answer';
+            btn.addEventListener('click', () => handleAnswer(index));
+            answersEl.appendChild(btn);
+        });
+
+        resetTimer();
+    }
+
+    function handleAnswer(selected) {
+        const q = quizData[currentQuestion];
+        if (selected === q.correct) {
+            score++;
+            currentQuestion++;
+            loadQuestion();
+        } else {
+            lives--;
+            updateLives();
+            if (lives === 0) {
+                endGame();
+            }
+        }
+    }
+
+    function updateLives() {
+        livesEl.textContent = `Lives: ${lives}`;
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timeLeft = 10;
+        timerEl.textContent = `Time: ${timeLeft}`;
+        timer = setInterval(() => {
+            timeLeft--;
+            timerEl.textContent = `Time: ${timeLeft}`;
+            if (timeLeft === 0) {
+                lives--;
+                updateLives();
+                if (lives === 0) {
+                    endGame();
+                } else {
+                    currentQuestion++;
+                    loadQuestion();
+                }
+            }
+        }, 1000);
+    }
+
+    function endGame() {
+    clearInterval(timer); // Stop the timer
+
+    // Hide all quiz elements
+    quizEl.style.display = 'none';
+
+    // Show game over message
+    gameOverEl.style.display = 'block';
+    gameOverEl.textContent = `Your score is ${score}.`;
+
+    // Add "Play Again" button
+    refreshBtn.textContent = "Play Again";
+    refreshBtn.className = 'start-btn';
+    refreshBtn.style.marginTop = '20px';
+
+    // Append button only if it's not already there
+    if (!gameOverEl.contains(refreshBtn)) {
+        gameOverEl.appendChild(refreshBtn);
+    }
+
+    refreshBtn.addEventListener('click', () => {
+        location.reload(); // Restart the game
+    });
+}
+
+    startBtn.addEventListener('click', () => {
+        shuffleQuestions();
+        startBtn.style.display = 'none';
+        loadQuestion();
+    });
+</script>
+
+</body>
+</html>

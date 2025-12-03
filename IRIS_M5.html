@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="QUIZ_BEE_TEMPLATE_WITH_IMAGE _NO_TIMER.css">
+    <link rel="icon" href="LOGO_THREE_STEM_SOCIETY.png">
+    <title>UC STEM SOCIETY</title>
+</head>
+<body>
+
+<section class="SECTION_ONE">  
+
+<div class="SECTION_ONE_INTRODUCTORY">
+<h1>
+    MODULE 5
+</h1>
+
+<P>
+    <b>INSTRUCTION:</b>
+    Select the correct answer for each question. You have 3 lives to complete the quiz. If you choose the wrong answer or run out of time, you will lose a life. Once all your lives are gone, the quiz will end. Good luck!
+</P>
+
+<a href="IRIS_HOMEPAGE.html">GO BACK</a>
+</div>
+
+<div class="quiz-container">
+    <div id="quiz" style="display: none;">
+        <div id="lives" class="lives">Lives: 3</div>
+
+        <!-- PUT YOUR IMAGE QUESTION HERE -->
+
+            <!-- IMAGE 1 -->
+            <img id="questionImage" class="question-image" src="#" alt="Question Image 1" style="display: none; max-width: 100%; height: auto; text-align: center;">
+            
+            <!-- IMAGE 2 -->
+            <img id="questionImage" class="question-image" src="#" alt="Question Image 2" style="display: none; max-width: 100%; height: auto;">
+       
+        <!-- PUT YOUR IMAGE QUESTION HERE -->
+
+        <div id="question" class="question">Press Start to Begin</div>
+        <div id="answers" class="answers"></div>
+    </div>
+    <button id="startBtn" class="start-btn">Start</button>
+    <div id="gameOver" class="game-over" style="display: none;">Game Over! Refresh to play again.</div>
+</div>
+
+</section>
+
+<script>
+   const quizData = [
+        {
+            question: "This forms the backbone of programming and algorithms",
+            // image: "QUESTION IMAGE",
+            options: [
+                "List Structures",
+                "Algorithms",
+                "Data Structures",
+                "Arrays"
+            ],
+            correct: 2
+        },
+        {
+            question: "This allows programmers to store, organize, and manipulate large amounts of data efficiently",
+            // image: "QUESTION IMAGE",
+            options: [
+                "Arrays",
+                "Variables",
+                "Data types",
+                "Algorithms"
+            ],
+            correct: 0
+        },
+        {
+            question: "Which of the following are NOT importances of an array?",
+            // image: "QUESTION IMAGE",
+            options: [
+                "Direct access to elements",
+                "Efficient data management",
+                "Memory efficiency",
+                "None of the above"
+            ],
+            correct: 3
+        },
+        {
+            question: "How many elements can this array hold?\n\tint[] data = new int[10];",
+            // image: "QUESTION IMAGE",
+            options: ["9", "10", "11", "Invalid syntax"],
+            correct: 1
+        },
+        {
+            question: "Using the given array, what is at index 1?\nInt[] data = {10, 20, 30, 40, 50};",
+            // image: "QUESTION IMAGE",
+            options: ["10", "20", "30", "40"],
+            correct: 1
+        },
+        {
+            question: "Using the given array, what is the element at index [0][2]?\nString[][] students = {{Anna, Ynna, Ina}, {John, Jan, Johnny}, {Carl, Karla, Kael}};",
+            // image: "QUESTION IMAGE",
+            options: ["Anna", "Ynna", "Ina", "Index out of bounds error"],
+            correct: 2
+        },
+        {
+            question: "colors.length returns\n A. Total number of columns\n B. Total number of arrays inside\n C. Total number of characters\n D. Index of last element",
+            // image: "QUESTION IMAGE",
+            options: [
+                "Total number of columns",
+                "Total number of arrays inside",
+                "Total number of characters",
+                "Index of last element"
+            ],
+            correct: 1
+        },
+        {
+            question: "A two-dimensional array is\n A. A list of strings\n B. Arrays inside an array\n C. A dynamic list\n D. A single row of numbers",
+            // image: "QUESTION IMAGE",
+            options: [
+                "A list of strings",
+                "Arrays inside an array",
+                "A dynamic list",
+                "A single row of numbers"
+            ],
+            correct: 1
+        },
+        {
+            question: "String[][] names = new String[2][3] has\n A. 2 columns and 3 rows\n B. 2 rows and 3 columns\n C. 6 rows\n D. 6 columns",
+            // image: "QUESTION IMAGE",
+            options: [
+                "2 columns and 3 rows",
+                "2 rows and 3 columns",
+                "6 rows",
+                "6 columns"
+            ],
+            correct: 1
+        },
+        {
+            question: "students[1][2] accesses\n A. Row 2, Column 3\n B. Row 1, Column 2\n C. Row 3, Column 1\n D. Column 2, Row 1",
+            // image: "QUESTION IMAGE",
+            options: [
+                "Row 2, Column 3",
+                "Row 1, Column 2",
+                "Row 3, Column 1",
+                "Column 2, Row 1"
+            ],
+            correct: 0
+        },
+        {
+            question: "A nested loop is needed to",
+            options: [
+                "Access a one-dimensional array",
+                "Modify integers",
+                "Access all elements of a 2D array",
+                "Print a single value"
+            ],
+            correct: 2
+        },
+        {
+            question: "int[] data = new int[5] creates",
+            options: [
+                "Five empty elements",
+                "No elements",
+                "Five elements with random values",
+                "An array that resizes automatically"
+            ],
+            correct: 0
+        },
+        {
+            question: "data[1] = 10 performs",
+            options: [
+                "Deletion",
+                "Index shift",
+                "Element modification",
+                "Array resizing"
+            ],
+            correct: 2
+        },
+        {
+            question: "In a 2D array, colors[i].length represents",
+            options: [
+                "Number of rows",
+                "Number of columns in row i",
+                "Total size of the array",
+                "Always equal for all rows"
+            ],
+            correct: 1
+        },
+        {
+            question: "Arrays are stored in",
+            options: [
+                "Random memory locations",
+                "Linked memory blocks",
+                "Contiguous memory locations",
+                "External devices"
+            ],
+            correct: 2
+        },
+        {
+            question: "Direct access means",
+            options: [
+                "Sequential search only",
+                "Accessing elements only from start",
+                "Access by specific index instantly",
+                "Printing elements only"
+            ],
+            correct: 2
+        },
+        {
+            question: "Image processing often uses",
+            options: [
+                "1D arrays",
+                "2D arrays",
+                "3D arrays",
+                "No arrays"
+            ],
+            correct: 2
+        },
+        {
+            question: "int[][] a = {{1,2},{3,4,5}} shows",
+            options: [
+                "All rows must be equal in length",
+                "Rows may have different lengths",
+                "Compilation error",
+                "Only one row allowed"
+            ],
+            correct: 1
+        },
+        {
+            question: "Arrays are used to implement",
+            options: [
+                "Only variables",
+                "Complex data structures",
+                "Only output devices",
+                "Only string storage"
+            ],
+            correct: 1
+        },
+        {
+            question: "The inner loop of a 2D array traversal handles",
+            options: [
+                "Rows",
+                "Columns",
+                "Full array length",
+                "Memory allocation"
+            ],
+            correct: 1
+        },
+    ];
+
+    const livesEl = document.getElementById('lives');
+    const timerEl = document.getElementById('timer');
+    const questionEl = document.getElementById('question');
+    const answersEl = document.getElementById('answers');
+    const startBtn = document.getElementById('startBtn');
+    const gameOverEl = document.getElementById('gameOver');
+    const refreshBtn = document.createElement('button');
+    const quizEl = document.getElementById('quiz');
+    const questionImageEl = document.getElementById('questionImage');
+
+    let currentQuestion = 0;
+    let lives = 3;
+    let timer;
+    let timeLeft = 10;
+    let score = 0;
+
+    function shuffleQuestions() {
+        for (let i = quizData.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [quizData[i], quizData[j]] = [quizData[j], quizData[i]];
+        }
+    }
+
+    function loadQuestion() {
+        if (currentQuestion >= quizData.length) {
+            endGame();
+            return;
+        }
+
+        quizEl.style.display = 'block';
+        const q = quizData[currentQuestion];
+        questionEl.textContent = q.question;
+        answersEl.innerHTML = '';
+
+        if (q.image) {
+            questionImageEl.src = q.image;
+            questionImageEl.style.display = 'block';
+        } else {
+            questionImageEl.style.display = 'none';
+        }
+
+        q.options.forEach((option, index) => {
+            const btn = document.createElement('button');
+            btn.textContent = option;
+            btn.className = 'answer';
+            btn.addEventListener('click', () => handleAnswer(index));
+            answersEl.appendChild(btn);
+        });
+
+        resetTimer();
+    }
+
+    function handleAnswer(selected) {
+        const q = quizData[currentQuestion];
+        if (selected === q.correct) {
+            score++;
+            currentQuestion++;
+            loadQuestion();
+        } else {
+            lives--;
+            updateLives();
+            if (lives === 0) {
+                endGame();
+            }
+        }
+    }
+
+    function updateLives() {
+        livesEl.textContent = `Lives: ${lives}`;
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timeLeft = 10;
+        timerEl.textContent = `Time: ${timeLeft}`;
+        timer = setInterval(() => {
+            timeLeft--;
+            timerEl.textContent = `Time: ${timeLeft}`;
+            if (timeLeft === 0) {
+                lives--;
+                updateLives();
+                if (lives === 0) {
+                    endGame();
+                } else {
+                    currentQuestion++;
+                    loadQuestion();
+                }
+            }
+        }, 1000);
+    }
+
+    function endGame() {
+    clearInterval(timer); // Stop the timer
+
+    // Hide all quiz elements
+    quizEl.style.display = 'none';
+
+    // Show game over message
+    gameOverEl.style.display = 'block';
+    gameOverEl.textContent = `Your score is ${score}.`;
+
+    // Add "Play Again" button
+    refreshBtn.textContent = "Play Again";
+    refreshBtn.className = 'start-btn';
+    refreshBtn.style.marginTop = '20px';
+
+    // Append button only if it's not already there
+    if (!gameOverEl.contains(refreshBtn)) {
+        gameOverEl.appendChild(refreshBtn);
+    }
+
+    refreshBtn.addEventListener('click', () => {
+        location.reload(); // Restart the game
+    });
+}
+
+    startBtn.addEventListener('click', () => {
+        shuffleQuestions();
+        startBtn.style.display = 'none';
+        loadQuestion();
+    });
+</script>
+
+</body>
+</html>
